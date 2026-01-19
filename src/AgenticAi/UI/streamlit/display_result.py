@@ -8,7 +8,6 @@ class DisplayResultsSreamlit:
         self.usecase = usecase
         self.graph = graph
         self.user_message = user_message
-        # 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
     def display_result_on_ui(self):
         
         if self.usecase == "Basic Chatbot":
