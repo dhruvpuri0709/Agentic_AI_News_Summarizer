@@ -30,3 +30,24 @@ class DisplayResultsSreamlit:
                     print("--------------")
             except Exception as e:
                 st.error(f"Error: display failed with error as {e}")
+        
+        elif self.usecase == "Chatbot With Web":
+            # Prepare state and invoke the graph
+            print("reached chatbot with web display usecase")
+            initial_state = {"messages":[self.user_message]}
+            res = self.graph.invoke(initial_state)
+            
+            for message in res["messages"]:
+                if type(message) == HumanMessage:
+                    with st.chat_message("user"):
+                        st.write(message.content)
+                elif type(message) == ToolMessage:
+                    with st.chat_message("ai"):
+                        st.write("Tool Call Start")
+                        st.write(message.content)
+                        st.write("Tool Call End")
+                elif type(message) == AIMessage and message.content:
+                    with st.chat_message("assistant"):
+                        st.write(message.content)
+            
+            
